@@ -1,5 +1,6 @@
 import 'package:home_widget/home_widget.dart';
 import 'package:intl/intl.dart';
+import '../models/app_settings.dart';
 
 class HomeWidgetService {
   static const _appGroupId = 'group.com.example.charging_clock';
@@ -10,20 +11,28 @@ class HomeWidgetService {
     await HomeWidget.setAppGroupId(_appGroupId);
   }
 
-  static Future<void> updateWidget() async {
+  static Future<void> updateWidget({AppSettings? settings}) async {
     final now = DateTime.now();
-    final h24 = DateFormat('HH:mm').format(now);
-    final h12 = DateFormat('hh:mm a').format(now);
+    final use24h = settings?.widgetShow24h ?? true;
+    final showSeconds = settings?.widgetShowSeconds ?? true;
+    final showDate = settings?.widgetShowDate ?? true;
+    final showDay = settings?.widgetShowDay ?? true;
+
+    final timeStr = use24h
+        ? DateFormat('HH:mm').format(now)
+        : DateFormat('hh:mm').format(now);
+    final amPm = use24h ? '' : DateFormat('a').format(now);
     final seconds = DateFormat('ss').format(now);
-    final date = DateFormat('EEE, d MMM').format(now).toUpperCase();
+    final dateStr = DateFormat('EEE, d MMM').format(now).toUpperCase();
     final dayOfWeek = DateFormat('EEEE').format(now).toUpperCase();
 
-    await HomeWidget.saveWidgetData('time_24h', h24);
-    await HomeWidget.saveWidgetData('time_12h', h12);
-    await HomeWidget.saveWidgetData('seconds', seconds);
-    await HomeWidget.saveWidgetData('date_str', date);
-    await HomeWidget.saveWidgetData('day_of_week', dayOfWeek);
-    await HomeWidget.saveWidgetData('timestamp', now.millisecondsSinceEpoch);
+    await HomeWidget.saveWidgetData('time_str', timeStr);
+    await HomeWidget.saveWidgetData('am_pm', amPm);
+    await HomeWidget.saveWidgetData('seconds', showSeconds ? seconds : '');
+    await HomeWidget.saveWidgetData('date_str', showDate ? dateStr : '');
+    await HomeWidget.saveWidgetData('day_of_week', showDay ? dayOfWeek : '');
+    await HomeWidget.saveWidgetData('show_seconds', showSeconds);
+    await HomeWidget.saveWidgetData('show_date', showDate);
 
     await HomeWidget.updateWidget(
       androidName: _androidWidgetName,

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="12dp"
+    android:background="@drawable/widget_background">
+
+    <TextView
+        android:id="@+id/widget_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FRIDAY"
+        android:textColor="#3A6E58"
+        android:textSize="9sp"
+        android:letterSpacing="0.25"
+        android:fontFamily="monospace"
+        android:layout_marginBottom="2dp"/>
+
+    <TextView
+        android:id="@+id/widget_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:textColor="#E8F8F0"
+        android:textSize="48sp"
+        android:letterSpacing="0.05"
+        android:fontFamily="monospace"/>
+
+    <TextView
+        android:id="@+id/widget_seconds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00"
+        android:textColor="#00FFA8"
+        android:textSize="13sp"
+        android:letterSpacing="0.2"
+        android:fontFamily="monospace"
+        android:layout_marginTop="2dp"/>
+
+    <TextView
+        android:id="@+id/widget_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MON, 1 JAN"
+        android:textColor="#2A5040"
+        android:textSize="8sp"
+        android:letterSpacing="0.2"
+        android:fontFamily="monospace"
+        android:layout_marginTop="6dp"/>
+
+</LinearLayout>

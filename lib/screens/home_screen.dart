@@ -29,8 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
     HomeWidgetService.init();
 
     final settings = context.read<AppSettings>();
-    _monitor = DeviceMonitorService(
-        landscapeThreshold: settings.landscapeThreshold);
+    _monitor =
+        DeviceMonitorService(landscapeThreshold: settings.landscapeThreshold);
     _monitor.start();
 
     _monitor.statusStream.listen((status) {
@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
       }
 
       // Keep home widget updated whenever status changes
-      HomeWidgetService.updateWidget();
+      HomeWidgetService.updateWidget(settings: settings);
     });
   }
 
@@ -210,8 +210,8 @@ class _MonitorTab extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: Row(
         children: [
-          Icon(icon, size: 18,
-              color: active ? _accent : const Color(0xFF3A4A50)),
+          Icon(icon,
+              size: 18, color: active ? _accent : const Color(0xFF3A4A50)),
           const SizedBox(width: 14),
           Expanded(
             child: Text(label,
@@ -219,7 +219,9 @@ class _MonitorTab extends StatelessWidget {
                   fontFamily: 'monospace',
                   fontSize: 11,
                   letterSpacing: 3,
-                  color: active ? Colors.white.withOpacity(0.8) : const Color(0xFF3A4A50),
+                  color: active
+                      ? Colors.white.withOpacity(0.8)
+                      : const Color(0xFF3A4A50),
                 )),
           ),
           Text(value,
@@ -250,7 +252,8 @@ class _MonitorTab extends StatelessWidget {
         children: [
           AnimatedContainer(
             duration: const Duration(milliseconds: 300),
-            width: 7, height: 7,
+            width: 7,
+            height: 7,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: both ? _accent : const Color(0xFF2A3540),
@@ -380,8 +383,7 @@ class _NavItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(icon,
-                  size: 20,
-                  color: active ? _accent : const Color(0xFF3A4A50)),
+                  size: 20, color: active ? _accent : const Color(0xFF3A4A50)),
               const SizedBox(height: 4),
               Text(
                 label,
